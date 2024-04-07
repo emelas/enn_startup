@@ -1,6 +1,7 @@
 langchain
 langchain-community
 python-dotenv
+PyPDF2
 streamlit
 streamlit-extras
 PyPDF2

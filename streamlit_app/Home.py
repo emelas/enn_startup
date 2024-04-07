@@ -1,20 +1,8 @@
-import io
-from io import BytesIO
-import base64
-
-import pandas as pd
-import tabula
-import PyPDF2
-from img2table.document import Image
-import camelot
-from importlib import reload
 import streamlit as st
 
-import ocrmypdf
-
 # Set page title
-st.set_page_config(page_title='IRM App')
-st.title("IRM Web App - Home Page")
+st.set_page_config(page_title='ENN - Streamlit Beta')
+st.title("ENN Web App - Home Page")
 
 
 # @st.cache_data(ttl=60*60)

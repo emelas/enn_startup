@@ -131,7 +131,7 @@ def main():
                             llm = OpenAI()
                             chain = load_qa_chain(llm,verbose=True)
                             response = chain.run(input_documents=loader.load(), question=query)
-                    st.write(response)
+                        st.write(response)
 
 if __name__ == '__main__':
     main()

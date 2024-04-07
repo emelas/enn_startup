@@ -1,0 +1,9 @@
+langchain
+langchain-community
+python-dotenv
+streamlit
+streamlit-extras
+PyPDF2
+faiss-cpu==1.7.4
+openai
+tiktoken

@@ -64,7 +64,7 @@ def save_uploaded_file(uploaded_file, folder_path):
     return file_path
 
 @st.cache_data(show_spinner=False)
-def load_pdf(read_method,file_path):
+def load_pdf(read_method,file_path,extract_images):
     if 'azure' in read_method.lower():
         endpoint = dotenv_values().get('AZURE_DOC_INTELLIGENCE_ENDPOINT')
         key = dotenv_values().get('AZURE_DOC_INTELLIGENCE_API_KEY')
@@ -75,7 +75,7 @@ def load_pdf(read_method,file_path):
         documents = loader.load()
     else:
 
-        loader = PyPDFLoader(file_path)
+        loader = PyPDFLoader(file_path,extract_images=extract_images)
         pages = loader.load_and_split()
 
         os.environ['OPENAI_API_KEY'] = dotenv_values().get('OPENAI_API_KEY')
@@ -104,7 +104,8 @@ load_dotenv()
 def main():
     st.header("Chat with PDF 💬")
 
-    read_method = st.sidebar.selectbox('Read Method',['OpenAI','Azure Doc Intelligence'],index =None,placeholder="Choose an option")
+    read_method = st.sidebar.selectbox('Load Method',['OpenAI','Azure Doc Intelligence'],index =None,placeholder="Choose an option")
+    extract_images = st.sidebar.checkbox('Extract Images?')
 
     # upload a PDF file
     pdf = st.file_uploader("Upload your PDF", type='pdf')
@@ -118,7 +119,7 @@ def main():
         if read_method:
             if st.checkbox('Read PDF'):
                 with st.spinner('Reading PDF...'):
-                    loader = load_pdf(read_method,file_path)
+                    loader = load_pdf(read_method,file_path,extract_images)
 
                 query = st.text_input("Ask questions about your PDF file:")
                 # st.write(query)
